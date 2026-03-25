@@ -59,8 +59,13 @@ def download_clip(url: str, rank: int) -> Path:
     output_path = OUTPUT_DIR / f"video_{rank:02d}.mp4"
 
     if output_path.exists():
-        print(f"  ⏭  [{rank}] Already downloaded — skipping ({output_path})")
-        return output_path
+        size_mb = output_path.stat().st_size / (1024 * 1024)
+        if size_mb > 0.5:  # more than 500KB = real clip
+            print(f"  ⏭  [{rank}] Already downloaded ({size_mb:.1f} MB) — skipping ({output_path})")
+            return output_path
+        else:
+            print(f"  ⚠  [{rank}] Existing file too small ({size_mb:.2f} MB) — re-downloading")
+            output_path.unlink()
 
     # yt-dlp writes to a temp name then renames; use a template
     output_template = str(OUTPUT_DIR / f"video_{rank:02d}.%(ext)s")

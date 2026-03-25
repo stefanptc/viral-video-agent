@@ -119,8 +119,14 @@ def _generate_colab(prompt: str, negative_prompt: str, clip_number: int) -> Path
     output_path = OUTPUT_DIR / f"clip_{clip_number:02d}.mp4"
 
     if output_path.exists():
-        print(f"  ⏭  Clip {clip_number} already exists — skipping")
-        return output_path
+        # Validate the existing file is a real video, not a placeholder
+        size_mb = output_path.stat().st_size / (1024 * 1024)
+        if size_mb > 0.1:  # more than 100KB = real clip
+            print(f"  ⏭  Clip {clip_number} already exists ({size_mb:.1f} MB) — skipping")
+            return output_path
+        else:
+            print(f"  ⚠  Clip {clip_number} exists but is too small ({size_mb:.2f} MB) — regenerating")
+            output_path.unlink()
 
     # Save prompt details for the user
     TEMP_DIR.mkdir(parents=True, exist_ok=True)
@@ -198,8 +204,14 @@ def _generate_wan2gp(prompt: str, negative_prompt: str, clip_number: int) -> Pat
 
     output_path = OUTPUT_DIR / f"clip_{clip_number:02d}.mp4"
     if output_path.exists():
-        print(f"  ⏭  Clip {clip_number} already exists — skipping")
-        return output_path
+        # Validate the existing file is a real video, not a placeholder
+        size_mb = output_path.stat().st_size / (1024 * 1024)
+        if size_mb > 0.1:  # more than 100KB = real clip
+            print(f"  ⏭  Clip {clip_number} already exists ({size_mb:.1f} MB) — skipping")
+            return output_path
+        else:
+            print(f"  ⚠  Clip {clip_number} exists but is too small ({size_mb:.2f} MB) — regenerating")
+            output_path.unlink()
 
     TEMP_DIR.mkdir(parents=True, exist_ok=True)
     settings = {
