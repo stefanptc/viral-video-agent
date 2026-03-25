@@ -106,7 +106,7 @@ def get_llm_high_tokens(
 
 def get_creative_llm(
     temperature: float = 0.75,
-    max_tokens:  int   = 2048,
+    max_tokens:  int   = 50000,
 ) -> ChatOpenAI:
     """
     Higher-temperature LLM for the Film Director agent.
