@@ -366,7 +366,7 @@ def social_science_node(state: AgentState) -> dict:
         print(f"  ❌ {msg}")
         return {"formula_error": msg}
 
-    llm = get_llm()
+    llm = get_llm_high_tokens(temperature=0.1, max_tokens=50000)
     breakdowns_json = json.dumps(
         [b.model_dump(exclude={"qa_passed", "qa_attempts"}) for b in passed],
         indent=2,
@@ -434,7 +434,7 @@ def editor_chief_node(state: AgentState) -> dict:
     if not formula:
         return {"formula_error": "No formula to review"}
 
-    llm = get_llm()
+    llm = get_llm_high_tokens(temperature=0.1, max_tokens=50000)
     formula_json = json.dumps(
         formula.model_dump(exclude={"status", "editor_feedback", "revision_count"}),
         indent=2,
