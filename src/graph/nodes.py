@@ -533,7 +533,7 @@ def sales_node(state: AgentState) -> dict:
         print("  ⚠  No TARGET_PRODUCT set — skipping sales injection")
         return {}
 
-    llm = get_llm()
+    llm = get_llm_high_tokens(temperature=0.3, max_tokens=50000)
     storyboard_json = json.dumps(
         storyboard.model_dump(exclude={"status", "human_notes"}),
         indent=2,
