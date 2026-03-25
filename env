@@ -1,0 +1,17 @@
+# LM Studio — points to the local OpenAI-compatible endpoint
+LM_STUDIO_BASE_URL="http://localhost:1234/v1"
+LM_STUDIO_MODEL="qwen3.5-35b-a3b"   # match the exact model name shown in LM Studio
+
+# Jina AI — free tier works, grab key at https://jina.ai
+JINA_API_KEY="jina_2fb422f0ff0840ccba37cd1ddabbd31f2W2N-P5PyzGhZ6RWfgwxNuufgbCP"
+
+# Generation mode: "colab" (free, manual) or "wan2gp" (local GPU)
+GENERATION_MODE="colab"
+WAN2GP_DIR="/home/stefan-petica/AI/Wan2GP"
+# Model to use: --t2v-14B (best quality), --t2v-1-3B (faster, less VRAM)
+WAN2GP_MODEL="--t2v-14B"
+# Memory profile 1-5: 4 = low VRAM safe, 3 = faster if you have headroom
+WAN2GP_PROFILE="4"
+
+# Product to inject in Phase 3 (Sales Agent)
+TARGET_PRODUCT="Nuka-Cola"

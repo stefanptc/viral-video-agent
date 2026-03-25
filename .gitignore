@@ -1,0 +1,26 @@
+# Environment
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.python-version
+
+# Data directories (videos can be huge)
+data/1_raw_clips/
+data/2_breakdowns/
+data/3_final_outputs/
+data/_wan2gp_tmp/
+
+# LM Studio / model files
+*.gguf
+*.safetensors
+*.bin
+
+# IDE
+.cursor/
+.vscode/
+
+# Logs
+*.log
+uv.lock
